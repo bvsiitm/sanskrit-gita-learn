@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="sa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>भगवद्गीतासंस्कृतशिक्षकः</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Noto+Serif+Devanagari:wght@300;400;500&display=block"
+      rel="stylesheet"
+    />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        background: #faf4e8;
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      /* Parchment grain overlay — sits above everything, pointer-events off */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.35;
+      }
+      /* Keyframes used by Hero and intro sections */
+      @keyframes fadeUp  { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+      @keyframes fadeIn  { from { opacity:0; } to { opacity:1; } }
+      @keyframes floatY  { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+      @keyframes pulse   { 0%,100% { opacity:0.4; } 50% { opacity:0.8; } }
+      /* Named animation utility classes */
+      .anim-fadeUp-1 { animation: fadeUp 1s ease 0.3s both; }
+      .anim-fadeUp-2 { animation: fadeUp 1s ease 0.6s both; }
+      .anim-fadeUp-3 { animation: fadeUp 1s ease 0.9s both; }
+      .anim-fadeUp-4 { animation: fadeUp 1s ease 1.2s both; }
+      .anim-fadeIn-slow { animation: fadeIn 2s ease 2s both; }
+      .anim-float  { animation: floatY 6s ease-in-out infinite; }
+      .anim-pulse  { animation: pulse  2s ease-in-out infinite; }
+    </style>
+    <script type="module" crossorigin src="/sanskrit-gita-learn/assets/index-_gob7iM0.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

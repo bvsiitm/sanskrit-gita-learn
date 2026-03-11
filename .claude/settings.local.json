@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -L -o \"/Users/bvs/claude-test/Gita App/public/krishna-arjuna.jpg\" \"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Krishna_and_Arjun_on_the_battlefield_of_Kurukshetra.jpg/480px-Krishna_and_Arjun_on_the_battlefield_of_Kurukshetra.jpg\" -w \"HTTP %{http_code}, size: %{size_download} bytes\")",
+      "Bash(curl -L -A \"Mozilla/5.0\" -o \"/Users/bvs/claude-test/Gita App/public/krishna-arjuna.jpg\" \"https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Mahabharata_Ravi_Varma.jpg/480px-Mahabharata_Ravi_Varma.jpg\" -w \"\\\\nHTTP %{http_code}, size: %{size_download} bytes\")",
+      "WebSearch",
+      "Bash(curl -L -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36\" --referer \"https://en.wikipedia.org/\" -o \"/Users/bvs/claude-test/Gita App/public/krishna-arjuna.jpg\" \"https://upload.wikimedia.org/wikipedia/commons/a/a7/Krishna_and_Arjun_on_the_battlefield_of_Kurukshetra.jpg\" -w \"\\\\nHTTP %{http_code}, size: %{size_download} bytes\")",
+      "Bash(curl -L -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36\" -o \"/Users/bvs/claude-test/Gita App/public/krishna-arjuna.jpg\" \"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Krishna_and_Arjun_on_the_battlefield_of_Kurukshetra.jpg/640px-Krishna_and_Arjun_on_the_battlefield_of_Kurukshetra.jpg\" -w \"\\\\nHTTP %{http_code}, size: %{size_download} bytes\")",
+      "Bash(npm install:*)"
+    ]
+  }
+}
