@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>भगवद्गीतासंस्कृतशिक्षकः — An Explainer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Noto+Sans+Devanagari:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment:    #f9f2e3;
+    --parchment2:   #f2e8ce;
+    --parchment3:   #e8d9b0;
+    --ink:          #1c1008;
+    --ink2:         #3d2a10;
+    --ink3:         #6b4a22;
+    --ink4:         #9a7040;
+    --gold:         #b5770d;
+    --gold2:        #d4960f;
+    --saffron:      #c17f24;
+    --saffron2:     #e09428;
+    --indigo:       #1e2d5a;
+    --indigo2:      #2d4080;
+    --teal:         #1a5c52;
+    --crimson:      #8b1a1a;
+    --border:       rgba(181,119,13,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.4;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-8px); }
+  }
+  @keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50%       { opacity: 0.8; }
+  }
+  @keyframes drawLine {
+    from { width: 0; }
+    to   { width: 100%; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    background: radial-gradient(ellipse at 50% 60%, #1e1840 0%, #0d0c24 100%);
+    overflow: hidden;
+  }
+
+  .hero-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,220,120,0.7);
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  .hero-om {
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: 3rem;
+    color: rgba(212,175,55,0.3);
+    animation: float 6s ease-in-out infinite;
+    margin-bottom: 2rem;
+    animation: fadeIn 2s ease forwards;
+  }
+
+  .hero-sanskrit {
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    color: #f0d978;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 60px rgba(212,175,55,0.3), 0 2px 4px rgba(0,0,0,0.5);
+    animation: fadeUp 1s ease 0.3s both;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-transliteration {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: rgba(212,175,55,0.5);
+    font-style: italic;
+    letter-spacing: 0.15em;
+    animation: fadeUp 1s ease 0.6s both;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-tagline {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.55rem, 1.5vw, 0.75rem);
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    animation: fadeUp 1s ease 0.9s both;
+    margin-bottom: 3rem;
+  }
+
+  .hero-two-words {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    animation: fadeUp 1s ease 1.2s both;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-word {
+    padding: 0.6rem 1.4rem;
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 4px;
+    background: rgba(212,175,55,0.06);
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: 1.4rem;
+    color: rgba(240,217,120,0.85);
+  }
+
+  .hero-plus {
+    color: rgba(212,175,55,0.3);
+    font-size: 1.2rem;
+  }
+
+  .hero-equals {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: flex-start;
+  }
+
+  .hero-concept {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.25);
+    text-transform: uppercase;
+    border-left: 2px solid rgba(212,175,55,0.2);
+    padding-left: 0.7rem;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    animation: fadeIn 2s ease 2s both;
+  }
+
+  .scroll-hint span {
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    font-family: 'Cinzel', serif;
+  }
+
+  .scroll-arrow {
+    width: 1px;
+    height: 30px;
+    background: linear-gradient(to bottom, rgba(212,175,55,0.4), transparent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 6rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 80px;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    color: var(--ink2);
+    line-height: 1.25;
+    margin-bottom: 1.5rem;
+  }
+
+  h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 0.7rem;
+    margin-top: 2rem;
+  }
+
+  p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: var(--ink3);
+    margin-bottom: 1.2rem;
+    max-width: 65ch;
+  }
+
+  em { font-style: italic; color: var(--ink2); }
+  strong { font-weight: 600; color: var(--ink2); }
+
+  .skt {
+    font-family: 'Noto Sans Devanagari', serif;
+    color: var(--gold);
+    font-size: 1.05em;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin: 3rem 0;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .divider-ornament {
+    color: var(--parchment3);
+    font-size: 1.1rem;
+  }
+
+  /* ── FULL-WIDTH BANDS ── */
+  .band {
+    width: 100%;
+    padding: 5rem 2rem;
+  }
+
+  .band-dark {
+    background: var(--indigo);
+    color: rgba(255,255,255,0.75);
+  }
+
+  .band-dark p { color: rgba(255,255,255,0.6); }
+  .band-dark h2 { color: rgba(255,255,255,0.9); }
+  .band-dark em { color: rgba(212,175,55,0.85); font-style: italic; -webkit-text-fill-color: unset; }
+  .band-dark strong { color: rgba(255,255,255,0.9); -webkit-text-fill-color: unset; }
+  .band-dark .section-label { color: rgba(212,175,55,0.7); }
+  .band-dark .section-label::after { background: rgba(212,175,55,0.2); }
+
+  .band-saffron {
+    background: linear-gradient(135deg, #3d1a00 0%, #1e0d00 100%);
+  }
+
+  .band-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ── CONCEPT CARDS ── */
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+  }
+
+  .concept-card {
+    padding: 1.5rem;
+    background: var(--parchment2);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--saffron);
+    border-radius: 0 0 8px 8px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .concept-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(44,26,14,0.12);
+  }
+
+  .concept-number {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--parchment3);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .concept-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--saffron);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .concept-sanskrit {
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .concept-desc {
+    font-size: 0.88rem;
+    color: var(--ink4);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* ── SEQUENCE FLOW ── */
+  .sequence {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 2.5rem 0;
+  }
+
+  .seq-step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .seq-step:last-child { border-bottom: none; }
+
+  .seq-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--saffron);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .seq-content h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .seq-content p {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+
+  /* ── QUOTE BLOCK ── */
+  .pull-quote {
+    padding: 2.5rem 3rem;
+    border-left: 4px solid var(--saffron);
+    margin: 3rem 0;
+    background: var(--parchment2);
+    position: relative;
+  }
+
+  .pull-quote::before {
+    content: '\201C';
+    position: absolute;
+    top: -0.5rem;
+    left: 1.5rem;
+    font-size: 6rem;
+    color: var(--parchment3);
+    line-height: 1;
+    font-family: 'Cormorant Garamond', serif;
+    pointer-events: none;
+  }
+
+  .pull-quote p {
+    font-size: 1.35rem;
+    font-style: italic;
+    color: var(--ink2);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pull-quote cite {
+    display: block;
+    margin-top: 0.8rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    color: var(--ink4);
+    font-style: normal;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+  }
+
+  /* ── COMPARISON TABLE ── */
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.95rem;
+  }
+
+  .comparison thead tr {
+    background: var(--indigo);
+    color: white;
+  }
+
+  .comparison th {
+    padding: 0.9rem 1.2rem;
+    text-align: left;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .comparison td {
+    padding: 0.85rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink3);
+    line-height: 1.5;
+  }
+
+  .comparison tbody tr:nth-child(even) { background: var(--parchment2); }
+  .comparison tbody tr:hover { background: var(--parchment3); }
+
+  .td-bad  { color: var(--crimson); font-size: 0.85rem; }
+  .td-good { color: var(--teal); font-size: 0.85rem; }
+
+  /* ── DHATU SHOWCASE ── */
+  .dhatu-showcase {
+    background: linear-gradient(135deg, #0d0c1e 0%, #1a1640 100%);
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin: 2.5rem 0;
+    text-align: center;
+  }
+
+  .dhatu-root {
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: 3.5rem;
+    color: #f0d978;
+    text-shadow: 0 0 40px rgba(212,175,55,0.4);
+    margin-bottom: 0.3rem;
+  }
+
+  .dhatu-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    color: rgba(212,175,55,0.4);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .dhatu-forms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+  }
+
+  .dhatu-form {
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 4px;
+    background: rgba(212,175,55,0.05);
+    text-align: left;
+  }
+
+  .dhatu-form-skt {
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: 1.1rem;
+    color: #d4c070;
+  }
+
+  .dhatu-form-eng {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.3);
+    font-style: italic;
+    margin-top: 2px;
+  }
+
+  /* ── PHILOSOPHY SECTION ── */
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2.5rem 0;
+  }
+
+  @media (max-width: 600px) {
+    .philosophy-grid { grid-template-columns: 1fr; }
+    .concept-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .philosophy-item {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--parchment2);
+  }
+
+  .philosophy-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .philosophy-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    color: var(--saffron);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .philosophy-text {
+    font-size: 0.92rem;
+    color: var(--ink4);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ── SRS VISUAL ── */
+  .srs-visual {
+    background: var(--parchment2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+
+  .srs-timeline {
+    display: flex;
+    gap: 0;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  .srs-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .srs-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--saffron);
+    box-shadow: 0 0 8px rgba(193,127,36,0.4);
+  }
+
+  .srs-day {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: var(--ink4);
+    text-transform: uppercase;
+  }
+
+  .srs-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, var(--saffron), var(--parchment3));
+    min-width: 30px;
+    max-width: 80px;
+  }
+
+  /* ── FINAL CTA ── */
+  .cta-section {
+    text-align: center;
+    padding: 6rem 2rem;
+    background: radial-gradient(ellipse at 50% 50%, #1e1840 0%, #0a0818 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .cta-title {
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    color: #f0d978;
+    text-shadow: 0 0 40px rgba(212,175,55,0.3);
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+
+  .cta-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.4);
+    font-style: italic;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .cta-badges {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .cta-badge {
+    padding: 0.5rem 1.2rem;
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(212,175,55,0.5);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.2);
+    text-align: center;
+    padding: 2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  /* ── INLINE HIGHLIGHT ── */
+  .highlight {
+    background: linear-gradient(to right, var(--gold2), var(--saffron2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-style: italic;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(13,12,36,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,175,55,0.1);
+  }
+
+  .nav-brand {
+    font-family: 'Noto Sans Devanagari', serif;
+    font-size: 1rem;
+    color: rgba(240,217,120,0.7);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover { color: rgba(212,175,55,0.7); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">भगवद्गीतासंस्कृतशिक्षकः</div>
+  <ul class="nav-links">
+    <li><a href="#idea">The Idea</a></li>
+    <li><a href="#method">Method</a></li>
+    <li><a href="#dhaatu">Dhātu</a></li>
+    <li><a href="#srs">SRS</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-stars" id="stars"></div>
+
+  <div class="hero-om">ॐ</div>
+
+  <div class="hero-sanskrit">धृतराष्ट्र उवाच</div>
+  <div class="hero-transliteration">Dhṛtarāṣṭra uvāca</div>
+  <div class="hero-tagline">Two words · Four concepts · One ancient text · A new way to learn Sanskrit</div>
+
+  <div class="hero-two-words">
+    <div class="hero-word">धृतराष्ट्रः</div>
+    <div class="hero-plus">+</div>
+    <div class="hero-word">उवाच</div>
+    <div class="hero-plus">=</div>
+    <div class="hero-equals">
+      <div class="hero-concept">Vibhakti — who speaks</div>
+      <div class="hero-concept">Lakāra — tense</div>
+      <div class="hero-concept">Dhātu — root</div>
+      <div class="hero-concept">Sandhi — sound rules</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ── THE PROBLEM ── -->
+<section id="idea" style="padding-top: 7rem;">
+  <div class="section-label reveal">The Problem</div>
+  <h2 class="reveal">Sanskrit is not hard.<br>The way it is taught is.</h2>
+  <p class="reveal">Most students encounter Sanskrit in one of three ways: rote-learning of shlokas in school with no understanding, an intimidating grammar textbook with thousands of rules before a single sentence, or a translation they can read but cannot parse.</p>
+  <p class="reveal">The Bhagavad Gita sits on millions of shelves. But reading it in Sanskrit — really reading it, knowing what each word is doing — remains out of reach for nearly everyone who wants to.</p>
+
+  <div class="pull-quote reveal">
+    <p>The Gita teaches Sanskrit grammar simply by existing. Every verse is a worked example. The question is how to use it.</p>
+  </div>
+
+  <div class="divider reveal"><div class="divider-ornament">✦</div></div>
+</section>
+
+<!-- ── THE INSIGHT ── -->
+<section style="padding-top: 0;">
+  <div class="section-label reveal">The Insight</div>
+  <h2 class="reveal">The top 192 dhātus unlock nearly everything</h2>
+  <p class="reveal">A corpus analysis of Classical Sanskrit reveals that just <strong>192 verbal roots</strong> account for the vast majority of verb usage across the Gita, Upanishads, and Mahābhārata. More strikingly: <strong>95% of the dhātus needed to read the Bhagavad Gita</strong> are in this top-192 list.</p>
+  <p class="reveal">This is the Sanskrit equivalent of learning the 1,000 most common English words to unlock 85% of spoken conversation. Frequency-first learning is not a shortcut — it is the most direct path.</p>
+
+  <div class="concept-grid">
+    <div class="concept-card reveal" style="transition-delay: 0.1s">
+      <div class="concept-number">192</div>
+      <div class="concept-name">Dhātus</div>
+      <div class="concept-desc">Most frequent verbal roots in Classical Sanskrit, ranked by corpus frequency</div>
+    </div>
+    <div class="concept-card reveal" style="transition-delay: 0.2s">
+      <div class="concept-number">95%</div>
+      <div class="concept-name">Coverage</div>
+      <div class="concept-desc">Of Bhagavad Gita roots are in the top-192 list. The overlap is not coincidence — it is linguistic reality.</div>
+    </div>
+    <div class="concept-card reveal" style="transition-delay: 0.3s">
+      <div class="concept-number">#2</div>
+      <div class="concept-name">√वच्</div>
+      <div class="concept-desc">The root of उवाच is the second most frequent dhātu in all of Classical Sanskrit</div>
+    </div>
+    <div class="concept-card reveal" style="transition-delay: 0.4s">
+      <div class="concept-number">700</div>
+      <div class="concept-name">Verses</div>
+      <div class="concept-desc">The Bhagavad Gita. The target. Every lesson points toward reading it unaided.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DARK BAND: THE METHOD ── -->
+<div class="band band-dark" id="method">
+  <div class="band-inner">
+    <div class="section-label reveal">The Method</div>
+    <h2 class="reveal">Known → +1 → Drill → +1 → Drill → SRS</h2>
+    <p class="reveal" style="color: rgba(255,255,255,0.6); max-width: 65ch;">The learning sequence is built on one principle: <em>always start from what the student already knows</em>, then add exactly one new idea. Drill on that. Then add one more. After a few ideas, spaced repetition. The exit condition at every stage is mastery, not time spent.</p>
+
+    <div class="sequence">
+      <div class="seq-step reveal">
+        <div class="seq-dot">0</div>
+        <div class="seq-content">
+          <h4>Anchor — What you already know</h4>
+          <p style="color: rgba(255,255,255,0.5);">Character names you recognise from the Mahābhārata. Arjuna, Krishna, Dhritarashtra. Now see them in Devanāgarī. Zero grammar load. Pure recognition. Confidence builder.</p>
+        </div>
+      </div>
+      <div class="seq-step reveal">
+        <div class="seq-dot">1</div>
+        <div class="seq-content">
+          <h4>+1 · Vibhakti — The nominative ending</h4>
+          <p style="color: rgba(255,255,255,0.5);">Sanskrit encodes grammatical role in the word itself — not word order. The subject takes Prathamā Vibhakti. Masculine singular = <span class="skt" style="color: #f0d978;">-ः</span>. One rule. Every subject in the Gita.</p>
+        </div>
+      </div>
+      <div class="seq-step reveal">
+        <div class="seq-dot">2</div>
+        <div class="seq-content">
+          <h4>+1 · Lakāra — The verb tense</h4>
+          <p style="color: rgba(255,255,255,0.5);">Sanskrit modifies the root itself for tense — no auxiliary words. <span class="skt" style="color: #f0d978;">उवाच</span> = Liṭ Lakāra, perfect tense, third person singular. He said. Already done. Complete.</p>
+        </div>
+      </div>
+      <div class="seq-step reveal">
+        <div class="seq-dot">3</div>
+        <div class="seq-content">
+          <h4>+1 · Dhātu — The root</h4>
+          <p style="color: rgba(255,255,255,0.5);">Every verb descends from a dhātu. <span class="skt" style="color: #f0d978;">उवाच</span> comes from <span class="skt" style="color: #f0d978;">√वच्</span> — to speak. Know the root, and nine other forms across the Gita become instantly recognisable family members.</p>
+        </div>
+      </div>
+      <div class="seq-step reveal">
+        <div class="seq-dot">4</div>
+        <div class="seq-content">
+          <h4>+1 · Sandhi — Sound combination rules</h4>
+          <p style="color: rgba(255,255,255,0.5);">Now you know <span class="skt" style="color: #f0d978;">धृतराष्ट्रः</span> should have a <span class="skt" style="color: #f0d978;">ः</span>. So where did it go? Visarga Lopa — Pāṇini 8.3.17. The <span class="skt" style="color: #f0d978;">ः</span> disappears before <span class="skt" style="color: #f0d978;">उ</span>. One rule, every speaker, every chapter.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pull-quote reveal" style="background: rgba(255,255,255,0.04); border-left-color: rgba(212,175,55,0.5);">
+      <p style="color: rgba(255,255,255,0.7);">Sandhi makes no sense until you know what the original form should be. That is why Sandhi comes last — not first.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── DHĀTU SECTION ── -->
+<section id="dhaatu">
+  <div class="section-label reveal">The Root</div>
+  <h2 class="reveal">One dhātu. Nine encounters across the Gita.</h2>
+  <p class="reveal">The student starts with <span class="skt">उवाच</span> and — by the end of the course — recognises all these forms as members of the same family. This is the dhātu-first approach: one root, multiple contexts, progressive recognition.</p>
+
+  <div class="dhatu-showcase reveal">
+    <div class="dhatu-root">√वच्</div>
+    <div class="dhatu-label">To speak · To say · To tell · #2 Dhātu in Classical Sanskrit</div>
+    <div class="dhatu-forms">
+      <div class="dhatu-form">
+        <div class="dhatu-form-skt">उवाच</div>
+        <div class="dhatu-form-eng">he said (perfect)</div>
+      </div>
+      <div class="dhatu-form">
+        <div class="dhatu-form-skt">ऊचुः</div>
+        <div class="dhatu-form-eng">they said (plural)</div>
+      </div>
+      <div class="dhatu-form">
+        <div class="dhatu-form-skt">उक्त्वा</div>
+        <div class="dhatu-form-eng">having said</div>
+      </div>
+      <div class="dhatu-form">
+        <div class="dhatu-form-skt">उच्यते</div>
+        <div class="dhatu-form-eng">it is said (passive)</div>
+      </div>
+      <div class="dhatu-form">
+        <div class="dhatu-form-skt">वक्ष्यामि</div>
+        <div class="dhatu-form-eng">I will tell</div>
+      </div>
+      <div class="dhatu-form">
+        <div class="dhatu-form-skt">वचनम्</div>
+        <div class="dhatu-form-eng">a word / speech</div>
+      </div>
+      <div class="dhatu-form">
+        <div class="dhatu-form-skt">वाच्</div>
+        <div class="dhatu-form-eng">Voice · the goddess Vāk</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider reveal"><div class="divider-ornament">❧</div></div>
+</section>
+
+<!-- ── COMPARISON ── -->
+<section style="padding-top: 0;">
+  <div class="section-label reveal">Why Different</div>
+  <h2 class="reveal">This is not another flashcard app</h2>
+
+  <table class="comparison reveal">
+    <thead>
+      <tr>
+        <th>Other approaches</th>
+        <th>This approach</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-bad">Word-level memorisation</td>
+        <td class="td-good">Root-level generative understanding</td>
+      </tr>
+      <tr>
+        <td class="td-bad">Arbitrary vocabulary order</td>
+        <td class="td-good">Frequency-ranked, corpus-validated sequence</td>
+      </tr>
+      <tr>
+        <td class="td-bad">Language first, then text</td>
+        <td class="td-good">Text first — real Gita verses from Day 1</td>
+      </tr>
+      <tr>
+        <td class="td-bad">Generic SRS (plain flashcards)</td>
+        <td class="td-good">Dhātu-aware SRS — one root unlocks many cards</td>
+      </tr>
+      <tr>
+        <td class="td-bad">Sandhi explained before grammar</td>
+        <td class="td-good">Sandhi explained after you know what form to expect</td>
+      </tr>
+      <tr>
+        <td class="td-bad">Progress measured in time</td>
+        <td class="td-good">Progress measured in mastery — Bloom 2-sigma approach</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ── SRS SECTION ── -->
+<div class="band" style="background: var(--parchment2);" id="srs">
+  <div class="band-inner">
+    <div class="section-label reveal">Memory Science</div>
+    <h2 class="reveal">Spaced Repetition — built in, not bolted on</h2>
+    <p class="reveal">Inspired by Michael Nielsen and Andy Matuschak's <em>Quantum Country</em>, the cards live inside the essay. You read prose, encounter a concept, and a card appears immediately. You answer it. The card remembers when you need to see it again.</p>
+
+    <div class="srs-visual reveal">
+      <div style="font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--saffron); margin-bottom: 0.5rem;">SM-2 Review Intervals</div>
+      <div style="font-size: 0.85rem; color: var(--ink4); font-style: italic; margin-bottom: 1.5rem;">A card you answer correctly today will return at increasing intervals</div>
+      <div class="srs-timeline">
+        <div class="srs-node">
+          <div class="srs-dot" style="background: var(--saffron); width:18px; height:18px;"></div>
+          <div class="srs-day">Today</div>
+        </div>
+        <div class="srs-line"></div>
+        <div class="srs-node">
+          <div class="srs-dot"></div>
+          <div class="srs-day">Day 1</div>
+        </div>
+        <div class="srs-line" style="min-width: 50px; max-width: 100px;"></div>
+        <div class="srs-node">
+          <div class="srs-dot"></div>
+          <div class="srs-day">Day 4</div>
+        </div>
+        <div class="srs-line" style="min-width: 70px; max-width: 120px;"></div>
+        <div class="srs-node">
+          <div class="srs-dot"></div>
+          <div class="srs-day">Day 10</div>
+        </div>
+        <div class="srs-line" style="min-width: 90px; max-width: 150px;"></div>
+        <div class="srs-node">
+          <div class="srs-dot"></div>
+          <div class="srs-day">Day 25</div>
+        </div>
+        <div class="srs-line" style="min-width: 110px; max-width: 180px; background: linear-gradient(to right, var(--saffron), transparent);"></div>
+        <div class="srs-node">
+          <div class="srs-dot" style="background: var(--teal); width:10px; height:10px;"></div>
+          <div class="srs-day">Long-term</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="philosophy-grid">
+      <div class="philosophy-item reveal">
+        <div class="philosophy-icon">📖</div>
+        <div class="philosophy-title">Embedded Cards</div>
+        <p class="philosophy-text">Cards appear inline in the essay — reading and drilling are one seamless experience, not two separate modes.</p>
+      </div>
+      <div class="philosophy-item reveal">
+        <div class="philosophy-icon">🧠</div>
+        <div class="philosophy-title">Mastery Exit</div>
+        <p class="philosophy-text">You move to the next concept only when the current one is solid. Time spent is irrelevant. Mastery is the gate.</p>
+      </div>
+      <div class="philosophy-item reveal">
+        <div class="philosophy-icon">✦</div>
+        <div class="philosophy-title">Wrong = Learning</div>
+        <p class="philosophy-text">Every wrong answer has a specific explanation — pointing to the correct root, case, or rule. Wrong answers teach, not just penalise.</p>
+      </div>
+      <div class="philosophy-item reveal">
+        <div class="philosophy-icon">🪔</div>
+        <div class="philosophy-title">Real Text Always</div>
+        <p class="philosophy-text">Every example comes from the actual Gita. The target — reading unaided — is visible from the very first card.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CLOSING CTA ── -->
+<div class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="cta-title reveal">एक dhātus. अनेक forms. एक Gita.</div>
+  <div class="cta-sub reveal">One root. Many forms. One text.</div>
+  <div class="cta-badges reveal">
+    <div class="cta-badge">Chapter I · In Progress</div>
+    <div class="cta-badge">21 Cards · 4 Sets</div>
+    <div class="cta-badge">Version 0 · Built in one session</div>
+    <div class="cta-badge">भगवद्गीतासंस्कृतशिक्षकः</div>
+  </div>
+</div>
+
+<footer>
+  भगवद्गीतासंस्कृतशिक्षकः &nbsp;·&nbsp; Chapter I &nbsp;·&nbsp; Version 0 &nbsp;·&nbsp; Built with curiosity
+</footer>
+
+<script>
+  // Stars
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() < 0.15 ? 2.5 : 1.2;
+    s.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      top: ${Math.random() * 100}%;
+      left: ${Math.random() * 100}%;
+      opacity: ${0.2 + Math.random() * 0.5};
+      animation-delay: ${Math.random() * 4}s;
+      animation-duration: ${2 + Math.random() * 4}s;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const delay = parseFloat(entry.target.style.transitionDelay || '0');
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, delay * 1000);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    // stagger siblings
+    const siblings = Array.from(el.parentNode.children).filter(c => c.classList.contains('reveal'));
+    const idx = siblings.indexOf(el);
+    if (idx > 0) el.style.transitionDelay = `${idx * 0.08}s`;
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
