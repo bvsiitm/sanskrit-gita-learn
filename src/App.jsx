@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { cardSets } from './data/cardSets'
 import MCQCard from './components/MCQCard'
 import Reveal from './components/Reveal'
@@ -355,11 +357,64 @@ export default function App() {
           connects nine other verb forms across 700 verses (Dhātu). That is
           the whole of Lesson 1.
         </p></Reveal>
+        {/* ── NEXT LESSON ── */}
+        <Reveal>
+          <NextLessonButton />
+        </Reveal>
         </div>{/* /set-4 */}
 
       </main>
     </div>
   )
+}
+
+function NextLessonButton() {
+  const [hovered, setHovered] = useState(false)
+  return (
+    <div style={next.wrapper}>
+      <div style={next.endLabel}>End of Lesson 1</div>
+      <Link
+        to="/lesson/2"
+        style={{
+          ...next.btn,
+          background: hovered ? T.color.gold : 'transparent',
+          color:      hovered ? '#fff' : T.color.gold,
+        }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        Lesson 2 &nbsp;→
+      </Link>
+    </div>
+  )
+}
+
+const next = {
+  wrapper: {
+    textAlign: 'center',
+    padding: '2rem 0 2rem',
+  },
+  endLabel: {
+    fontFamily: T.font.label,
+    fontSize: '0.6rem',
+    letterSpacing: '0.3em',
+    textTransform: 'uppercase',
+    color: T.color.saffron,
+    opacity: 0.5,
+    marginBottom: '1.2rem',
+  },
+  btn: {
+    display: 'inline-block',
+    padding: '0.75rem 2.5rem',
+    border: `1px solid ${T.color.gold}`,
+    borderRadius: '4px',
+    fontFamily: T.font.label,
+    fontSize: '0.75rem',
+    letterSpacing: '0.25em',
+    textTransform: 'uppercase',
+    textDecoration: 'none',
+    transition: 'background 0.25s ease, color 0.25s ease',
+  },
 }
 
 const styles = {
