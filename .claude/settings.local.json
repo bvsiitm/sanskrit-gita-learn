@@ -8,7 +8,8 @@
       "WebSearch",
       "Bash(curl -L -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36\" --referer \"https://en.wikipedia.org/\" -o \"/Users/bvs/claude-test/Gita App/public/krishna-arjuna.jpg\" \"https://upload.wikimedia.org/wikipedia/commons/a/a7/Krishna_and_Arjun_on_the_battlefield_of_Kurukshetra.jpg\" -w \"\\\\nHTTP %{http_code}, size: %{size_download} bytes\")",
       "Bash(curl -L -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36\" -o \"/Users/bvs/claude-test/Gita App/public/krishna-arjuna.jpg\" \"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Krishna_and_Arjun_on_the_battlefield_of_Kurukshetra.jpg/640px-Krishna_and_Arjun_on_the_battlefield_of_Kurukshetra.jpg\" -w \"\\\\nHTTP %{http_code}, size: %{size_download} bytes\")",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(node -e \"const p=require\\(''./package.json''\\); console.log\\(''react-router-dom:'', p.dependencies?.[''react-router-dom''] || p.devDependencies?.[''react-router-dom''] || ''NOT INSTALLED''\\)\")"
     ]
   }
 }

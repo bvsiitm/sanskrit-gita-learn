@@ -368,22 +368,24 @@ export default function App() {
   )
 }
 
+const SAGE = '#4a5e4a'
+
 function NextLessonButton() {
   const [hovered, setHovered] = useState(false)
   return (
     <div style={next.wrapper}>
       <div style={next.endLabel}>End of Lesson 1</div>
       <Link
-        to="/lesson/2"
+        to="/interlude"
         style={{
           ...next.btn,
-          background: hovered ? T.color.gold : 'transparent',
-          color:      hovered ? '#fff' : T.color.gold,
+          background: hovered ? SAGE : 'transparent',
+          color:      hovered ? '#fff' : SAGE,
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        Lesson 2 &nbsp;→
+        Interlude — Before Lesson 2 &nbsp;→
       </Link>
     </div>
   )
@@ -396,21 +398,21 @@ const next = {
   },
   endLabel: {
     fontFamily: T.font.label,
-    fontSize: '0.6rem',
-    letterSpacing: '0.3em',
+    fontSize: '0.55rem',
+    letterSpacing: '0.4em',
     textTransform: 'uppercase',
-    color: T.color.saffron,
-    opacity: 0.5,
+    color: SAGE,
+    opacity: 0.55,
     marginBottom: '1.2rem',
   },
   btn: {
     display: 'inline-block',
-    padding: '0.75rem 2.5rem',
-    border: `1px solid ${T.color.gold}`,
-    borderRadius: '4px',
+    padding: '0.85rem 2.5rem',
+    border: `1px solid ${SAGE}`,
+    borderRadius: '3px',
     fontFamily: T.font.label,
-    fontSize: '0.75rem',
-    letterSpacing: '0.25em',
+    fontSize: '0.68rem',
+    letterSpacing: '0.3em',
     textTransform: 'uppercase',
     textDecoration: 'none',
     transition: 'background 0.25s ease, color 0.25s ease',
