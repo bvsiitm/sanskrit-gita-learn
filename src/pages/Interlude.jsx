@@ -102,23 +102,14 @@ export default function Interlude() {
         <img
           src={`${import.meta.env.BASE_URL}krishna-arjuna.jpg`}
           alt="Krishna and Arjuna at Kurukshetra"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', filter: 'saturate(0.85) sepia(0.12)' }}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 15%', filter: 'saturate(0.85) sepia(0.12)' }}
           onError={e => { e.currentTarget.style.display = 'none' }}
         />
-        {/* Gradient overlay: dark top → transparent → bleeds into parchment-green */}
+        {/* Gradient overlay: fades into parchment-green at bottom */}
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
-          background: 'linear-gradient(to bottom, rgba(20,28,15,0.55) 0%, transparent 45%, rgba(232,234,216,0.97) 100%)',
+          background: 'linear-gradient(to bottom, rgba(20,28,15,0.25) 0%, transparent 40%, rgba(232,234,216,0.97) 100%)',
         }} />
-        {/* Floating text */}
-        <div style={{ position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', width: '90%', maxWidth: '680px' }}>
-          <div style={{ fontFamily: T.font.label, fontSize: '0.6rem', letterSpacing: '0.5em', textTransform: 'uppercase', color: 'rgba(212,175,55,0.55)', marginBottom: '1.2rem' }}>
-            An Interlude
-          </div>
-          <div style={{ fontFamily: T.font.prose, fontStyle: 'italic', fontSize: 'clamp(1.6rem, 4vw, 3rem)', color: 'rgba(240,230,190,0.9)', lineHeight: 1.3, textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}>
-            Before the next lesson, a word on how to learn
-          </div>
-        </div>
       </div>
 
       {/* ── SECTION B — Parchment text ─────────────────────────────────────── */}
