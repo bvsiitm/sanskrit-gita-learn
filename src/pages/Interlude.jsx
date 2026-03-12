@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { T } from '../theme'
+import Reveal from '../components/Reveal'
 
 const SAGE        = '#4a5e4a'
 const BG          = '#e8ead8'
@@ -116,140 +117,169 @@ export default function Interlude() {
       <div style={{ background: BG, padding: '4rem 2rem 6rem', maxWidth: '680px', margin: '0 auto' }}>
 
         {/* Badge with ruled lines either side */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '3rem', justifyContent: 'center' }}>
-          <div style={{ flex: 1, height: '1px', background: SAGE, opacity: 0.25 }} />
-          <span style={{ fontFamily: T.font.label, fontSize: '0.55rem', letterSpacing: '0.4em', textTransform: 'uppercase', color: SAGE, whiteSpace: 'nowrap', border: `1px solid rgba(74,94,74,0.4)`, padding: '0.4rem 1rem', opacity: 0.8 }}>
-            On learning · Between Lesson 1 and Lesson 2
-          </span>
-          <div style={{ flex: 1, height: '1px', background: SAGE, opacity: 0.25 }} />
-        </div>
+        <Reveal>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '3rem', justifyContent: 'center' }}>
+            <div style={{ flex: 1, height: '1px', background: SAGE, opacity: 0.25 }} />
+            <span style={{ fontFamily: T.font.label, fontSize: '0.55rem', letterSpacing: '0.4em', textTransform: 'uppercase', color: SAGE, whiteSpace: 'nowrap', border: `1px solid rgba(74,94,74,0.4)`, padding: '0.4rem 1rem', opacity: 0.8 }}>
+              On learning · Between Lesson 1 and Lesson 2
+            </span>
+            <div style={{ flex: 1, height: '1px', background: SAGE, opacity: 0.25 }} />
+          </div>
+        </Reveal>
 
         {/* Drop-cap paragraph 1 */}
-        <p style={p.prose}>
-          <span style={p.dropCap}>E</span>
-          very act of learning happens inside a context — a background of hunches, half-formed
-          theories, and borrowed intuitions that the learner brings to the table before a single
-          new fact arrives. Karl Popper put it sharply:
-        </p>
+        <Reveal>
+          <p style={p.prose}>
+            <span style={p.dropCap}>E</span>
+            very act of learning happens inside a context — a background of hunches, half-formed
+            theories, and borrowed intuitions that the learner brings to the table before a single
+            new fact arrives. Karl Popper put it sharply:
+          </p>
+        </Reveal>
 
         {/* Pull quote */}
-        <blockquote style={p.blockquote}>
-          <p style={p.quoteText}>"All observation is theory-laden."</p>
-          <cite style={p.quoteCite}>— Karl Popper</cite>
-        </blockquote>
+        <Reveal>
+          <blockquote style={p.blockquote}>
+            <p style={p.quoteText}>"All observation is theory-laden."</p>
+            <cite style={p.quoteCite}>— Karl Popper</cite>
+          </blockquote>
+        </Reveal>
 
         {/* Paragraph 2 — split for readability */}
-        <p style={p.prose}>
-          The brain does not receive the world passively; it projects a model onto it, then corrects.
-          Learning is not filling an empty vessel. It is the ongoing refinement of a guess.
-        </p>
-        <p style={p.prose}>
-          This matters for how you should approach what follows. You already know something about how
-          languages work — from Hindi, Tamil, English, or wherever you come from. You have instincts
-          about what a verb is, what a subject does, what it means for a word to 'belong' to another.
-          Sanskrit will feel strange in places and eerily familiar in others. Both feelings are data.
-          Trust them. Guess freely.
-        </p>
-        <p style={{ ...p.prose, marginBottom: '2rem' }}>
-          When a card appears and you are not sure, do not wait for certainty before choosing. Pick
-          the answer that feels most plausible given what you know so far. If you are wrong, the
-          feedback will tell you exactly why — and the spaced repetition system will bring that card
-          back until the correct understanding has settled in. Wrong answers are not failures here.
-          They are the system working exactly as intended.
-        </p>
+        <Reveal>
+          <p style={p.prose}>
+            The brain does not receive the world passively; it projects a model onto it, then corrects.
+            Learning is not filling an empty vessel. It is the ongoing refinement of a guess.
+          </p>
+        </Reveal>
+        <Reveal>
+          <p style={p.prose}>
+            This matters for how you should approach what follows. You already know something about how
+            languages work — from Hindi, Tamil, English, or wherever you come from. You have instincts
+            about what a verb is, what a subject does, what it means for a word to 'belong' to another.
+            Sanskrit will feel strange in places and eerily familiar in others. Both feelings are data.
+            Trust them. Guess freely.
+          </p>
+        </Reveal>
+        <Reveal>
+          <p style={{ ...p.prose, marginBottom: '2rem' }}>
+            When a card appears and you are not sure, do not wait for certainty before choosing. Pick
+            the answer that feels most plausible given what you know so far. If you are wrong, the
+            feedback will tell you exactly why — and the spaced repetition system will bring that card
+            back until the correct understanding has settled in. Wrong answers are not failures here.
+            They are the system working exactly as intended.
+          </p>
+        </Reveal>
 
         {/* ── MCQ Card 1 ── */}
-        <InterludeCard
-          eyebrow="✦ GUESS FREELY · CARD 1 OF 2"
-          question="What is the meaning of उलूकः (ulūkaḥ)?"
-          options={[
-            {
-              label: 'Rabbit', correct: false,
-              feedback: "Close — but not quite. The Sanskrit for rabbit is शशः (śaśaḥ). The correct answer is owl: उलूकः.",
-            },
-            {
-              label: 'Owl', correct: true,
-              feedback: "Yes! उलूकः = owl. Notice how close it sounds to the English word 'owl' — both descend from the Proto-Indo-European root *ul-, an ancient onomatopoeia for the hooting sound. Sanskrit and English parted ways over 4,000 years ago, yet the owl kept its name in both. This is the Indo-European family at work.",
-            },
-            {
-              label: 'Mouse', correct: false,
-              feedback: "Not quite. Mouse in Sanskrit is मूषकः (mūṣakaḥ) — notice how that word echoes in English 'mouse' and Latin 'mus'. The correct answer is owl: उलूकः.",
-            },
-            {
-              label: 'Serpent', correct: false,
-              feedback: "Not this one. Serpent in Sanskrit is सर्पः (sarpaḥ) from the root √sṛp, to creep, which gives Latin serpens and English 'serpent.' उलूकः is the owl.",
-            },
-          ]}
-        />
+        <Reveal>
+          <InterludeCard
+            eyebrow="✦ GUESS FREELY · CARD 1 OF 2"
+            question="What is the meaning of उलूकः (ulūkaḥ)?"
+            options={[
+              {
+                label: 'Rabbit', correct: false,
+                feedback: "Close — but not quite. The Sanskrit for rabbit is शशः (śaśaḥ). The correct answer is owl: उलूकः.",
+              },
+              {
+                label: 'Owl', correct: true,
+                feedback: "Yes! उलूकः = owl. Notice how close it sounds to the English word 'owl' — both descend from the Proto-Indo-European root *ul-, an ancient onomatopoeia for the hooting sound. Sanskrit and English parted ways over 4,000 years ago, yet the owl kept its name in both. This is the Indo-European family at work.",
+              },
+              {
+                label: 'Mouse', correct: false,
+                feedback: "Not quite. Mouse in Sanskrit is मूषकः (mūṣakaḥ) — notice how that word echoes in English 'mouse' and Latin 'mus'. The correct answer is owl: उलूकः.",
+              },
+              {
+                label: 'Serpent', correct: false,
+                feedback: "Not this one. Serpent in Sanskrit is सर्पः (sarpaḥ) from the root √sṛp, to creep, which gives Latin serpens and English 'serpent.' उलूकः is the owl.",
+              },
+            ]}
+          />
+        </Reveal>
 
         {/* ── MCQ Card 2 ── */}
-        <InterludeCard
-          eyebrow="✦ GUESS FREELY · CARD 2 OF 2"
-          question="What is the meaning of दुहितृ (duhitṛ)?"
-          options={[
-            {
-              label: 'Son', correct: false,
-              feedback: "Son in Sanskrit is पुत्रः (putraḥ). दुहितृ is daughter — say it slowly: du-hi-tṛ.",
-            },
-            {
-              label: 'Father', correct: false,
-              feedback: "Father is पितृ (pitṛ) — itself a remarkable cognate: Latin pater, Greek patēr, English 'father', all from PIE *ph₂tḗr. But दुहितृ is daughter.",
-            },
-            {
-              label: 'Brother', correct: false,
-              feedback: "Brother is भ्रातृ (bhrātṛ) — note the -tṛ suffix, identical to दुहितृ. Sanskrit uses -tṛ for kinship terms. दुहितृ means daughter.",
-            },
-            {
-              label: 'Daughter', correct: true,
-              feedback: "Exactly. दुहितृ = daughter. Say them side by side: duhitṛ — daughter. The match runs across the whole Indo-European family: Greek thugátēr, German Tochter, Old English dohtor, all from Proto-Indo-European *dʰugh₂tḗr. The word has not changed its meaning in four thousand years.",
-            },
-          ]}
-        />
+        <Reveal>
+          <InterludeCard
+            eyebrow="✦ GUESS FREELY · CARD 2 OF 2"
+            question="What is the meaning of दुहितृ (duhitṛ)?"
+            options={[
+              {
+                label: 'Son', correct: false,
+                feedback: "Son in Sanskrit is पुत्रः (putraḥ). दुहितृ is daughter — say it slowly: du-hi-tṛ.",
+              },
+              {
+                label: 'Father', correct: false,
+                feedback: "Father is पितृ (pitṛ) — itself a remarkable cognate: Latin pater, Greek patēr, English 'father', all from PIE *ph₂tḗr. But दुहितृ is daughter.",
+              },
+              {
+                label: 'Brother', correct: false,
+                feedback: "Brother is भ्रातृ (bhrātṛ) — note the -tṛ suffix, identical to दुहितृ. Sanskrit uses -tṛ for kinship terms. दुहितृ means daughter.",
+              },
+              {
+                label: 'Daughter', correct: true,
+                feedback: "Exactly. दुहितृ = daughter. Say them side by side: duhitṛ — daughter. The match runs across the whole Indo-European family: Greek thugátēr, German Tochter, Old English dohtor, all from Proto-Indo-European *dʰugh₂tḗr. The word has not changed its meaning in four thousand years.",
+              },
+            ]}
+          />
+        </Reveal>
 
         {/* Paragraph 3 */}
-        <p style={{ ...p.prose, marginTop: '1.5rem', marginBottom: '3rem' }}>
-          Fluency — and genuine enjoyment — come when you begin to feel that Sanskrit is predictable.
-          That its rules follow from something. You are building a mental model of how the language
-          works, and that model will be corrected, sharpened, and extended lesson by lesson. You do
-          not need to remember everything said here on first reading. The programme is designed for
-          forgetting. Keep guessing, keep correcting, and the rest will follow.
-        </p>
+        <Reveal>
+          <p style={{ ...p.prose, marginTop: '1.5rem', marginBottom: '3rem' }}>
+            Fluency — and genuine enjoyment — come when you begin to feel that Sanskrit is predictable.
+            That its rules follow from something. You are building a mental model of how the language
+            works, and that model will be corrected, sharpened, and extended lesson by lesson. You do
+            not need to remember everything said here on first reading. The programme is designed for
+            forgetting. Keep guessing, keep correcting, and the rest will follow.
+          </p>
+        </Reveal>
 
         {/* Ornament divider */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', margin: '0 0 3rem' }}>
-          <div style={{ flex: 1, height: '1px', background: SAGE, opacity: 0.2 }} />
-          <span style={{ color: SAGE, opacity: 0.45, fontSize: '1.4rem', lineHeight: 1 }}>❧</span>
-          <div style={{ flex: 1, height: '1px', background: SAGE, opacity: 0.2 }} />
-        </div>
+        <Reveal>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', margin: '0 0 3rem' }}>
+            <div style={{ flex: 1, height: '1px', background: SAGE, opacity: 0.2 }} />
+            <span style={{ color: SAGE, opacity: 0.45, fontSize: '1.4rem', lineHeight: 1 }}>❧</span>
+            <div style={{ flex: 1, height: '1px', background: SAGE, opacity: 0.2 }} />
+          </div>
+        </Reveal>
 
         {/* Three summary cards */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(175px, 1fr))', gap: '1rem', marginBottom: '4.5rem' }}>
           {[
-            { num: 'I',   title: 'Guess freely',    body: 'Use whatever language you know. Intuition is data.' },
-            { num: 'II',  title: 'Wrong = Learning', body: 'The SRS brings missed cards back. Every wrong answer is the system doing its job.' },
-            { num: 'III', title: "Don't memorise",  body: 'You do not need to remember everything now. The programme is designed for forgetting.' },
+            { num: 'I',   title: 'Guess freely',    body: 'Use whatever language you know. Intuition is data.',                                             delay: 0   },
+            { num: 'II',  title: 'Wrong = Learning', body: 'The SRS brings missed cards back. Every wrong answer is the system doing its job.',              delay: 80  },
+            { num: 'III', title: "Don't memorise",  body: 'You do not need to remember everything now. The programme is designed for forgetting.',           delay: 160 },
           ].map(c => (
-            <div key={c.num} style={{ padding: '1.4rem 1.2rem', background: '#f0f1e4', border: `1px solid rgba(74,94,74,0.2)`, borderTop: `3px solid ${SAGE}`, borderRadius: '0 0 6px 6px' }}>
-              <div style={{ fontFamily: T.font.label, fontSize: '0.65rem', color: SAGE, opacity: 0.5, marginBottom: '0.3rem', letterSpacing: '0.2em' }}>{c.num}</div>
-              <div style={{ fontFamily: T.font.label, fontSize: '0.6rem', color: SAGE, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.6rem' }}>{c.title}</div>
-              <div style={{ fontFamily: T.font.prose, fontSize: '0.92rem', color: PROSE_COLOR, lineHeight: 1.65, fontStyle: 'italic' }}>{c.body}</div>
-            </div>
+            <Reveal key={c.num} delay={c.delay}>
+              <div style={{ padding: '1.4rem 1.2rem', background: '#f0f1e4', border: `1px solid rgba(74,94,74,0.2)`, borderTop: `3px solid ${SAGE}`, borderRadius: '0 0 6px 6px' }}>
+                <div style={{ fontFamily: T.font.label, fontSize: '0.65rem', color: SAGE, opacity: 0.5, marginBottom: '0.3rem', letterSpacing: '0.2em' }}>{c.num}</div>
+                <div style={{ fontFamily: T.font.label, fontSize: '0.6rem', color: SAGE, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.6rem' }}>{c.title}</div>
+                <div style={{ fontFamily: T.font.prose, fontSize: '0.92rem', color: PROSE_COLOR, lineHeight: 1.65, fontStyle: 'italic' }}>{c.body}</div>
+              </div>
+            </Reveal>
           ))}
         </div>
 
         {/* Continue to Lesson 2 */}
-        <div style={{ textAlign: 'center', borderTop: `1px solid rgba(74,94,74,0.18)`, paddingTop: '3rem' }}>
-          <div style={{ fontFamily: T.font.label, fontSize: '0.52rem', letterSpacing: '0.4em', textTransform: 'uppercase', color: SAGE, opacity: 0.5, marginBottom: '0.8rem' }}>
-            Continue to
+        <Reveal>
+          <div style={{ textAlign: 'center', borderTop: `1px solid rgba(74,94,74,0.18)`, paddingTop: '3rem' }}>
+            <div style={{ fontFamily: T.font.label, fontSize: '0.52rem', letterSpacing: '0.4em', textTransform: 'uppercase', color: SAGE, opacity: 0.5, marginBottom: '0.8rem' }}>
+              Continue to
+            </div>
+            <div style={{ fontFamily: T.font.prose, fontStyle: 'italic', fontSize: '1.8rem', color: PROSE_COLOR, marginBottom: '0.5rem' }}>
+              Lesson 2 — The Locative
+            </div>
+            <div style={{ fontFamily: T.font.devanagari, fontSize: '1.4rem', color: T.color.gold, letterSpacing: '0', marginBottom: '2rem' }}>
+              सप्तमी विभक्ति
+            </div>
+            <BeginButton />
+
+            {/* Return to Lesson 1 */}
+            <div style={{ marginTop: '1.5rem' }}>
+              <Link to="/" style={bt.back}>← Return to Lesson 1</Link>
+            </div>
           </div>
-          <div style={{ fontFamily: T.font.prose, fontStyle: 'italic', fontSize: '1.8rem', color: PROSE_COLOR, marginBottom: '0.5rem' }}>
-            Lesson 2 — The Locative
-          </div>
-          <div style={{ fontFamily: T.font.devanagari, fontSize: '1.4rem', color: T.color.gold, letterSpacing: '0', marginBottom: '2rem' }}>
-            सप्तमी विभक्ति
-          </div>
-          <BeginButton />
-        </div>
+        </Reveal>
 
       </div>
     </div>
@@ -387,6 +417,19 @@ const cs = {
     textTransform: 'uppercase',
     textDecoration: 'none',
     transition: 'background 0.25s ease, color 0.25s ease',
+  },
+}
+
+const bt = {
+  back: {
+    fontFamily: T.font.label,
+    fontSize: '0.52rem',
+    letterSpacing: '0.22em',
+    textTransform: 'uppercase',
+    color: SAGE,
+    opacity: 0.6,
+    textDecoration: 'none',
+    transition: 'opacity 0.2s ease',
   },
 }
 
