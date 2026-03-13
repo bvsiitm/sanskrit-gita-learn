@@ -1,22 +1,34 @@
 import { T } from '../theme'
 
-// Gold underline — marks words this lesson will analyse
+// Words in verse order — hi:true = word studied this lesson
+const WORDS = [
+  { skt: 'धर्मक्षेत्रे',   en: 'in the field of dharma', hi: true  },
+  { skt: 'कुरुक्षेत्रे',   en: 'in Kurukṣetra',         hi: true  },
+  { skt: 'समवेता',          en: 'having assembled',      hi: false },
+  { skt: 'युयुत्सवः',      en: 'eager to fight',        hi: false },
+  { skt: 'मामकाः',          en: 'my sons',               hi: false },
+  { skt: 'पाण्डवाश्चैव',   en: 'and the Pāṇḍavas',     hi: true  },
+  { skt: 'किमकुर्वत',       en: 'what did they do?',    hi: false },
+  { skt: 'सञ्जय',           en: 'O Sañjaya',            hi: true  },
+]
+
+// Maroon underline — marks words this lesson will analyse
 function Hi({ children }) {
   return (
     <span style={{
-      borderBottom: `2px solid ${T.color.gold}`,
-      paddingBottom: '1px',
+      borderBottom: '2px solid #7a1e1e',
+      paddingBottom: '2px',
     }}>
       {children}
     </span>
   )
 }
 
-// Softer underline for matching English words
+// Softer maroon underline for matching English words
 function TrHi({ children }) {
   return (
     <span style={{
-      borderBottom: `1.5px solid rgba(181,119,13,0.55)`,
+      borderBottom: '1.5px solid rgba(122,30,30,0.5)',
       paddingBottom: '1px',
     }}>
       {children}
@@ -56,9 +68,25 @@ export default function VerseDisplay() {
         — what did my sons and <TrHi>the Pāṇḍavas</TrHi> do?
       </p>
 
+      {/* Word-by-word breakdown */}
+      <div style={s.wordGrid}>
+        {WORDS.map(w => (
+          <div key={w.skt} style={s.wordItem}>
+            <span style={{
+              ...s.wordSkt,
+              borderBottom: w.hi ? '2px solid #7a1e1e' : 'none',
+              paddingBottom: w.hi ? '2px' : '0',
+            }}>
+              {w.skt}
+            </span>
+            <span style={s.wordEn}>{w.en}</span>
+          </div>
+        ))}
+      </div>
+
       {/* Lesson scope */}
       <p style={s.note}>
-        Four words highlighted — this lesson is about all four.
+        Four words underlined — this lesson is about all four.
       </p>
     </div>
   )
@@ -109,6 +137,36 @@ const s = {
     maxWidth: '52ch',
     margin: '0 auto 0.8rem',
     lineHeight: 1.75,
+  },
+  wordGrid: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: '0.5rem 1.4rem',
+    margin: '1.6rem auto 1.4rem',
+    maxWidth: '58ch',
+    borderTop: `1px solid ${T.color.border}`,
+    paddingTop: '1.4rem',
+  },
+  wordItem: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '0.2rem',
+  },
+  wordSkt: {
+    fontFamily: T.font.devanagari,
+    fontSize: '1.05rem',
+    color: T.color.gold,
+    letterSpacing: 0,
+  },
+  wordEn: {
+    fontFamily: T.font.prose,
+    fontSize: '0.72rem',
+    fontStyle: 'italic',
+    color: T.color.ink4,
+    textAlign: 'center',
+    lineHeight: 1.3,
   },
   note: {
     fontFamily: T.font.label,

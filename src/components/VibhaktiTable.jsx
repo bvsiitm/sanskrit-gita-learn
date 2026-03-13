@@ -12,7 +12,7 @@ const CASES = [
   { roman: 'Pañcamī',   skt: 'पञ्चमी',    form: '',      meaning: '',          hi: null   },
   { roman: 'Ṣaṣṭhī',    skt: 'षष्ठी',     form: '',      meaning: '',          hi: null   },
   { roman: 'Saptamī',   skt: 'सप्तमी',    form: 'रामे',  meaning: 'in Rāma',  hi: 'sage' },
-  { roman: 'Sambodhana', skt: 'सम्बोधन',  form: '',      meaning: '',          hi: null   },
+  { roman: 'Sambodh.',   skt: 'सम्बोधन',  form: '',      meaning: '',          hi: null   },
 ]
 
 // Per-column head/cell colour helpers
@@ -147,15 +147,21 @@ const s = {
     tableLayout: 'fixed',
   },
   th: {
-    padding: '0.55rem 0.4rem',
+    paddingTop: '0.55rem',
+    paddingBottom: '0.55rem',
+    paddingLeft: '0.3rem',
+    paddingRight: '0.3rem',
     textAlign: 'center',
     verticalAlign: 'bottom',
     border: `1px solid rgba(181,119,13,0.12)`,
     fontWeight: 400,
-    whiteSpace: 'nowrap',
+    wordBreak: 'break-word',
   },
   td: {
-    padding: '0.55rem 0.4rem',
+    paddingTop: '0.55rem',
+    paddingBottom: '0.55rem',
+    paddingLeft: '0.4rem',
+    paddingRight: '0.4rem',
     textAlign: 'center',
     verticalAlign: 'middle',
     border: `1px solid rgba(181,119,13,0.12)`,
@@ -170,6 +176,9 @@ const s = {
     opacity: 0.6,
     background: 'rgba(181,119,13,0.04)',
     textAlign: 'right',
+    paddingTop: '0.55rem',
+    paddingBottom: '0.55rem',
+    paddingLeft: '0.3rem',
     paddingRight: '0.6rem',
   },
   caseRoman: {

@@ -22,7 +22,31 @@ export default function MCQCard({ card, color = T.color.saffron }) {
 
   function handleRating(r) {
     setRating(r)
-    // SRS update will be wired in a later session
+    if (!card.id) return
+
+    // Load existing SRS state
+    let srs = {}
+    try { srs = JSON.parse(localStorage.getItem('gita-srs-state') || '{}') } catch {}
+
+    const prev = srs[card.id] || { interval: 0, easeFactor: 2.5, due: null, seen: false, correct: 0, incorrect: 0 }
+
+    let { interval, easeFactor, correct, incorrect } = prev
+
+    if (r === 'got') {
+      correct += 1
+      easeFactor = Math.min(3.0, easeFactor + 0.1)
+      interval = interval < 1 ? 1 : Math.round(interval * easeFactor)
+    } else if (r === 'unsure') {
+      interval = Math.max(1, Math.round(interval * 0.8))
+    } else { // missed
+      incorrect += 1
+      easeFactor = Math.max(1.3, easeFactor - 0.2)
+      interval = 1
+    }
+
+    const due = new Date(Date.now() + interval * 86400000).toISOString()
+    srs[card.id] = { interval, easeFactor, due, seen: true, correct, incorrect }
+    localStorage.setItem('gita-srs-state', JSON.stringify(srs))
   }
 
   return (
